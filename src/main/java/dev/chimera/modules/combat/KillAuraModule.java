@@ -25,7 +25,8 @@ public class KillAuraModule extends Module {
     public void init() {}
 
     @Override
-    public void onEnable() {}
+    public void onEnable() {
+    }
 
     @Override
     public void onDisable() {}

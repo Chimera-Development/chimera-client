@@ -67,6 +67,10 @@ public class EventBus {
 //        }).start();
     }
 
+    public Set<String> getAllListenerIDs(){
+        return listenerIDs.keySet();
+    }
+
     public static class PrioritySystem {
         private static class ListenerNode {
             Listener listener;
@@ -150,6 +154,11 @@ public class EventBus {
     }
 
     public <T> void postEvent(T event) {
+        if(!listenersByEventType.containsKey(event.getClass()))
+        {
+            // No listeners for event
+            return;
+        }
         ArrayList<Listener> listeners = sortMap(event);
         if (listeners != null) {
             listeners.forEach((listener) -> {
@@ -163,6 +172,11 @@ public class EventBus {
     }
 
     public <T> void postEventToListener(T event, String id) {
+        if(!listenersByEventType.containsKey(event.getClass()))
+        {
+            // No listeners for event
+            return;
+        }
         Listener listener = listenerIDs.get(id);
         if (listener.getMethod().getParameterTypes()[0] == event.getClass()) {
 
