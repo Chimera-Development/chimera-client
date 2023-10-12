@@ -3,7 +3,6 @@ package dev.chimera.client.addons;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.entrypoint.EntrypointContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
-import net.minecraft.client.MinecraftClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ public class AddonManager {
 
         // call onInitialize after all addons are loaded
         ADDON_LIST.forEach(AbstractAddon::onInitialize);
-        MinecraftClient.getInstance().stop();
     }
 
     public static void onExit() {
