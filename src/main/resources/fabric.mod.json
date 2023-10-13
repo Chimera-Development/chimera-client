@@ -1,28 +1,28 @@
 {
-  "schemaVersion": 1,
-  "id": "chimera-client",
-  "version": "${version}",
-  "name": "Chimera Client",
-  "description": "A (slightly) different take on the average minecraft utility mod",
-  "authors": [ "Patsore", "Shrecknt", "JamSharp" ],
-  "contact": {
-    "repo": "https://github.com/Chimera-Development/chimera-client"
-  },
-  "license": "MIT",
-  "icon": "assets/chimera-client/icon.png",
-  "environment": "client",
-  "entrypoints": {
-    "client": [
-      "dev.chimera.client.ChimeraClient"
-    ]
-  },
-  "mixins": [
-    "chimera-client.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}"
-  },
-  "accessWidener": "chimera-client.accesswidener"
+	"schemaVersion": 1,
+	"id": "chimera-client",
+	"version": "${version}",
+	"name": "Chimera Client",
+	"description": "A (slightly) different take on the average minecraft utility mod",
+	"authors": [ "Patsore", "Shrecknt", "JamSharp" ],
+	"contact": {
+		"repo": "https://github.com/Chimera-Development/chimera-client"
+	},
+	"license": "MIT",
+	"icon": "assets/chimera-client/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"dev.chimera.client.ChimeraClient"
+		]
+	},
+	"mixins": [
+		"chimera-client.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"fabric": "*",
+		"minecraft": "${minecraft_version}"
+	},
+	"accessWidener": "chimera-client.accesswidener"
 }
