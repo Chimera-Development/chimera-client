@@ -2,7 +2,6 @@ package dev.chimera.client.modules;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.chimera.client.events.RenderEvent;
-import dev.chimera.client.system.Module;
 import net.engio.mbassy.listener.Handler;
 import net.engio.mbassy.listener.Listener;
 import net.engio.mbassy.listener.References;
@@ -13,7 +12,7 @@ import org.lwjgl.glfw.GLFW;
 import static dev.chimera.client.ChimeraClient.*;
 
 @Listener(references = References.Strong)
-public class Trollface extends Module {
+public class Trollface extends AbstractModule {
 
     private int coordX = 10;
     private int coordY = 10;
@@ -22,20 +21,26 @@ public class Trollface extends Module {
     private boolean movingRight = false;
 
     private MinecraftClient MC = MinecraftClient.getInstance();
+    Identifier imagePath = new Identifier(MOD_ID, "trollface.png");
 
     public Trollface() {
         super("Trollface", "Displays a bouncing trollface on your screen", GLFW.GLFW_KEY_G);
         this.onEnable();
     }
 
+    public Trollface(Identifier imagePath) {
+        super("Trollface", "Displays a bouncing trollface on your screen", GLFW.GLFW_KEY_G);
+        this.onEnable();
+        this.imagePath = imagePath;
+    }
+
+
     @Handler
     public void render(RenderEvent event) {
         RenderSystem.disableDepthTest();
-        LOGGER.info("ranmodule");
-        Identifier identifier = new Identifier(MOD_ID, "trollface.png");
 
         checkedMove();
-        event.drawContext.drawTexture(identifier, coordX, coordY, 0, 0, 256, 256);
+        event.drawContext.drawTexture(imagePath, coordX, coordY, 0, 0, 256, 256);
 
         RenderSystem.enableDepthTest();
     }
@@ -100,5 +105,4 @@ public class Trollface extends Module {
             }
         }
     }
-
 }
