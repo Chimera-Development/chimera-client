@@ -20,7 +20,6 @@ public abstract class Module {
         this.description = description;
         this.keyBinding = -1;
         this.active = false;
-        EVENT_MANAGER.subscribe(this);
     }
 
     public static class KeybindListener extends HandlerInvocation<Module, KeyEvent> {
@@ -52,9 +51,12 @@ public abstract class Module {
         active = false;
     }
 
-    @Handler(invocation = KeybindListener.class)
     public void onKeyBind(KeyEvent event) {
         toggle();
+    }
+
+
+    public void onInit() {
     }
 
 

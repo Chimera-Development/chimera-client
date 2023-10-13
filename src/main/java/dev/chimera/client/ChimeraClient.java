@@ -1,10 +1,12 @@
 package dev.chimera.client;
 
 import dev.chimera.client.modules.Trollface;
+import dev.chimera.client.system.ModuleLoader;
 import net.engio.mbassy.bus.MBassador;
 import net.engio.mbassy.bus.error.IPublicationErrorHandler;
 import net.engio.mbassy.bus.error.PublicationError;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,10 +28,7 @@ public class ChimeraClient implements ModInitializer {
     public void onInitialize() {
 
 
-        Trollface trollface = new Trollface();
-
-
-
+        ModuleLoader.loadModule(Trollface.class, new Identifier(MOD_ID, "icon.png"));
 
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.

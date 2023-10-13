@@ -17,14 +17,22 @@ import static dev.chimera.client.ChimeraClient.LOGGER;
 public abstract class KeyboardMixin {
 
     @Unique
-    KeyEvent event = new KeyEvent();
+    KeyEvent.Down keyDownEvent = new KeyEvent.Down();
 
+    KeyEvent.Up keyUpEvent = new KeyEvent.Up();
+    //TODO needs to be reworked
     @Inject(method = "onKey", at = @At("HEAD"), cancellable = true)
     public void onKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo info) {
-        if (MinecraftClient.getInstance().currentScreen != null) {
-            event.key = key;
-            EVENT_MANAGER.post(event).now();
-            LOGGER.info(key + "posted key");
+        switch (action){
+            case 0: {
+                keyUpEvent.key = key;
+                EVENT_MANAGER.post(keyUpEvent).now();
+            }
+
+            case 1: {
+                keyDownEvent.key = key;
+                EVENT_MANAGER.post(keyDownEvent).now();
+            }
         }
     }
 }
