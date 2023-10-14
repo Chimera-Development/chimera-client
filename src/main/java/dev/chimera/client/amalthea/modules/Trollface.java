@@ -1,7 +1,8 @@
-package dev.chimera.client.modules;
+package dev.chimera.client.amalthea.modules;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.chimera.client.events.RenderEvent;
+import dev.chimera.client.modules.AbstractModule;
 import net.engio.mbassy.listener.Handler;
 import net.engio.mbassy.listener.Listener;
 import net.engio.mbassy.listener.References;
@@ -29,11 +30,9 @@ public class Trollface extends AbstractModule {
     }
 
     public Trollface(Identifier imagePath) {
-        super("Trollface", "Displays a bouncing trollface on your screen", GLFW.GLFW_KEY_G);
-        this.onEnable();
+        this();
         this.imagePath = imagePath;
     }
-
 
     @Handler
     public void render(RenderEvent event) {
@@ -44,7 +43,6 @@ public class Trollface extends AbstractModule {
 
         RenderSystem.enableDepthTest();
     }
-
 
     @Override
     public void onEnable() {
@@ -60,18 +58,12 @@ public class Trollface extends AbstractModule {
 
     private boolean isInBoundsY(int y) {
         int height = MC.getWindow().getScaledHeight();
-        if (y > 0 && y < height) {
-            return true;
-        }
-        return false;
+        return y > 0 && y < height;
     }
 
     private boolean isInBoundsX(int x) {
         int width = MC.getWindow().getScaledWidth();
-        if (x > 0 && x < width) {
-            return true;
-        }
-        return false;
+        return x > 0 && x < width;
     }
 
     void checkedMove() {

@@ -16,13 +16,13 @@ public class TabNodeWidget implements Drawable {
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        int xPos = node.getLayer() * 64;
+        int xPos = node.getLayer() * 128;
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        context.drawText(textRenderer, node.getTitle(), xPos, 0, 0xffffff, false);
+        context.drawText(textRenderer, node.getTitle(), xPos + 8, 8, 0xffffff, true);
         List<String> keys = node.getKeys();
         for (int i = 0; i < keys.size(); i++) {
             String key = keys.get(i);
-            context.drawText(textRenderer, key, xPos, (i + 1) * 8, 0xdddddd, false);
+            context.drawText(textRenderer, key, xPos + 8, (i + 1) * 16 + 8, 0xdddddd, true);
         }
     }
 }

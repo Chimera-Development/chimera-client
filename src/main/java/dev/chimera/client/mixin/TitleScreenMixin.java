@@ -14,7 +14,6 @@ import static dev.chimera.client.ChimeraClient.LOGGER;
 
 @Mixin(TitleScreen.class)
 public class TitleScreenMixin {
-
     @Unique
     RenderEvent renderEvent = new RenderEvent();
 

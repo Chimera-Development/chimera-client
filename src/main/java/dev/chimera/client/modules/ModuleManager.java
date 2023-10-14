@@ -1,20 +1,20 @@
-package dev.chimera.client.system;
+package dev.chimera.client.modules;
 
-import dev.chimera.client.modules.AbstractModule;
+import dev.chimera.client.util.TabTree;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModuleLoader {
+public class ModuleManager {
     public static List<AbstractModule> moduleList = new ArrayList<>();
 
-    //This method only accepts non-primitive types.
-    public static void loadModule(Class<? extends AbstractModule> moduleClass, Object... params) {
+    public static void loadModule(TabTree tree, Class<? extends AbstractModule> moduleClass, Object... params) {
         try {
             AbstractModule moduleInstance = moduleClass.getDeclaredConstructor(getConstructorParameterTypes(params)).newInstance(params);
             moduleInstance.onInit();
             moduleList.add(moduleInstance);
+            tree.put(moduleInstance.getName(), moduleInstance);
         } catch (InvocationTargetException | NoSuchMethodException | InstantiationException |
                  IllegalAccessException e) {
             throw new RuntimeException(e);

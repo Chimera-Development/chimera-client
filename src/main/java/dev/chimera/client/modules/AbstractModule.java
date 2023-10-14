@@ -19,7 +19,6 @@ public abstract class AbstractModule {
     }
 
     public static class KeybindListener extends HandlerInvocation<AbstractModule, KeyEvent> {
-
         public KeybindListener(SubscriptionContext context) {
             super(context);
         }
@@ -51,10 +50,8 @@ public abstract class AbstractModule {
         toggle();
     }
 
-
     public void onInit() {
     }
-
 
     public void toggle() {
         if (active) {
@@ -66,5 +63,13 @@ public abstract class AbstractModule {
 
     public boolean isActive() {
         return active;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
