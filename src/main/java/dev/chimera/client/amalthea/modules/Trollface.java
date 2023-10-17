@@ -2,7 +2,7 @@ package dev.chimera.client.amalthea.modules;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import dev.chimera.client.events.RenderEvent;
-import dev.chimera.client.modules.AbstractModule;
+import dev.chimera.client.modules.Module;
 import net.engio.mbassy.listener.Handler;
 import net.engio.mbassy.listener.Listener;
 import net.engio.mbassy.listener.References;
@@ -13,7 +13,7 @@ import org.lwjgl.glfw.GLFW;
 import static dev.chimera.client.ChimeraClient.*;
 
 @Listener(references = References.Strong)
-public class Trollface extends AbstractModule {
+public class Trollface extends Module {
 
     private int coordX = 10;
     private int coordY = 10;

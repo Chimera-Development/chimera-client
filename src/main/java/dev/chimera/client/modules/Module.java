@@ -5,37 +5,42 @@ import net.engio.mbassy.bus.MessagePublication;
 import net.engio.mbassy.dispatch.HandlerInvocation;
 import net.engio.mbassy.subscription.SubscriptionContext;
 
-public abstract class AbstractModule {
+import static dev.chimera.client.ChimeraClient.KEYBIND_MANAGER;
+
+public abstract class Module {
     private final String name;
     private final String description;
-    private int keyBinding;
+    public int keyBinding;
+    public boolean stickyKey = false;
     private boolean active;
 
-    public AbstractModule(String name, String description) {
+    public Module(String name, String description) {
         this.name = name;
         this.description = description;
         this.keyBinding = -1;
         this.active = false;
     }
 
-    public static class KeybindListener extends HandlerInvocation<AbstractModule, KeyEvent> {
+    public static class KeybindListener extends HandlerInvocation<Module, KeyEvent> {
         public KeybindListener(SubscriptionContext context) {
             super(context);
         }
 
         @Override
-        public void invoke(AbstractModule module, KeyEvent event, MessagePublication publication) {
+        public void invoke(Module module, KeyEvent event, MessagePublication publication) {
             if (event.key == module.keyBinding) {
                 module.onKeyBind(event);
             }
         }
     }
 
-    public AbstractModule(String name, String description, int keyBinding) {
+    public Module(String name, String description, int keyBinding) {
         this.name = name;
         this.description = description;
         this.keyBinding = keyBinding;
         this.active = false;
+
+        KEYBIND_MANAGER.registerModuleKeybind(this);
     }
 
     public void onEnable() {
@@ -58,6 +63,15 @@ public abstract class AbstractModule {
             onDisable();
         } else {
             onEnable();
+        }
+    }
+
+    public void setActive(boolean isActive) {
+        if (isActive == active) return;
+        if (isActive) {
+            onEnable();
+        } else {
+            onDisable();
         }
     }
 

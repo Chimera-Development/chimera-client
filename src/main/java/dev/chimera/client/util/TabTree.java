@@ -2,7 +2,7 @@ package dev.chimera.client.util;
 
 import dev.chimera.client.ChimeraClient;
 import dev.chimera.client.gui.widgets.TabNodeWidget;
-import dev.chimera.client.modules.AbstractModule;
+import dev.chimera.client.modules.Module;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.text.Text;
@@ -100,7 +100,7 @@ public class TabTree implements Drawable {
     }
 
     public void put(String key, Object treeNode) {
-        if (!(treeNode instanceof TabTree) && !(treeNode instanceof AbstractModule)) {
+        if (!(treeNode instanceof TabTree) && !(treeNode instanceof Module)) {
             ChimeraClient.LOGGER.warn("treeNode is of type '{}'", treeNode.getClass().toString());
             return;
         }

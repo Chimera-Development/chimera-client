@@ -2,7 +2,7 @@ package dev.chimera.client.addons;
 
 import net.minecraft.client.MinecraftClient;
 
-public abstract class AbstractAddon {
+public abstract class Addon {
     public static final MinecraftClient mc = MinecraftClient.getInstance();
 
     public String modId;

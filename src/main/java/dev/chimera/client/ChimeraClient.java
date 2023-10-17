@@ -2,6 +2,7 @@ package dev.chimera.client;
 
 import dev.chimera.client.addons.AddonManager;
 import dev.chimera.client.gui.TabGUIScreen;
+import dev.chimera.client.modules.KeybindManager;
 import dev.chimera.client.util.ModuleCategories;
 import dev.chimera.client.util.TabTree;
 import net.engio.mbassy.bus.MBassador;
@@ -15,12 +16,15 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 
 public class ChimeraClient implements ClientModInitializer {
+
+
     public static final String MOD_ID = "chimera-client";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     @SuppressWarnings("rawtypes")
     public static final MBassador EVENT_MANAGER = new MBassador(error -> {
         LOGGER.error(error.getMessage());
     });
+    public static final KeybindManager KEYBIND_MANAGER = new KeybindManager();
 
     @Override
     public void onInitializeClient() {

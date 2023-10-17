@@ -16,13 +16,13 @@ import static dev.chimera.client.ChimeraClient.LOGGER;
 @Mixin(Keyboard.class)
 public abstract class KeyboardMixin {
     @Unique
-    KeyEvent event = new KeyEvent();
+    KeyEvent keyEvent = new KeyEvent();
 
     @Inject(method = "onKey", at = @At("HEAD"), cancellable = true)
     public void onKey(long window, int key, int scancode, int action, int modifiers, CallbackInfo info) {
-        if (MinecraftClient.getInstance().currentScreen == null) {
-            event.key = key;
-            EVENT_MANAGER.post(event).now();
-        }
+
+        keyEvent.key = key;
+        keyEvent.pressed = action >= 1;
+        EVENT_MANAGER.post(keyEvent).now();
     }
 }
