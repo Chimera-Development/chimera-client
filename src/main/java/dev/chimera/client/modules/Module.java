@@ -4,8 +4,11 @@ import dev.chimera.client.events.KeyEvent;
 import net.engio.mbassy.bus.MessagePublication;
 import net.engio.mbassy.dispatch.HandlerInvocation;
 import net.engio.mbassy.subscription.SubscriptionContext;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 
 import static dev.chimera.client.ChimeraClient.KEYBIND_MANAGER;
+import static net.minecraft.util.math.MathHelper.lerp;
 
 public abstract class Module {
     private final String name;
@@ -13,12 +16,14 @@ public abstract class Module {
     public int keyBinding;
     public boolean stickyKey = false;
     private boolean active;
+    private ModuleCategory category;
 
-    public Module(String name, String description) {
+    public Module(String name, String description, ModuleCategory category) {
         this.name = name;
         this.description = description;
         this.keyBinding = -1;
         this.active = false;
+        this.category = category;
     }
 
     public static class KeybindListener extends HandlerInvocation<Module, KeyEvent> {
@@ -34,9 +39,10 @@ public abstract class Module {
         }
     }
 
-    public Module(String name, String description, int keyBinding) {
+    public Module(String name, String description, ModuleCategory category, int keyBinding) {
         this.name = name;
         this.description = description;
+        this.category = category;
         this.keyBinding = keyBinding;
         this.active = false;
 
@@ -61,8 +67,10 @@ public abstract class Module {
     public void toggle() {
         if (active) {
             onDisable();
+            MinecraftClient.getInstance().player.sendMessage(Text.of("Set " + name + " to disabled"));
         } else {
             onEnable();
+            MinecraftClient.getInstance().player.sendMessage(Text.of("Set " + name + " to enabled"));
         }
     }
 
@@ -85,5 +93,9 @@ public abstract class Module {
 
     public String getDescription() {
         return description;
+    }
+
+    public ModuleCategory getCategory() {
+        return category;
     }
 }

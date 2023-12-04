@@ -1,0 +1,12 @@
+{
+  "maxwell": {
+    "sounds": [
+      "chimera-client:maxwell"
+    ]
+  },
+  "secret": {
+    "sounds": [
+      "chimera-client:secret"
+    ]
+  }
+}

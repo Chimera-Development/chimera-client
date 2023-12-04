@@ -26,11 +26,12 @@ public class KeybindManager {
 
     @Handler(rejectSubtypes = false)
     public void onKeyPress(KeyEvent event) {
-
         List<Consumer<Boolean>> listeners = keyListeners.get(event.key);
-        listeners.forEach(listener -> {
-            listener.accept(event.pressed);
-        });
+        if (listeners != null){
+            listeners.forEach(listener -> {
+                listener.accept(event.pressed);
+            });
+        }
     }
 
     public void registerModuleKeybind(Module module) {
