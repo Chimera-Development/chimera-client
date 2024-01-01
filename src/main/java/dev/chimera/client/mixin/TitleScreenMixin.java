@@ -20,6 +20,9 @@ public class TitleScreenMixin {
     @Inject(method = "render", at = @At("TAIL"))
     public void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         renderEvent.drawContext = context;
+        renderEvent.mouseX = mouseX;
+        renderEvent.mouseY = mouseY;
+        renderEvent.delta = delta;
         EVENT_MANAGER.post(renderEvent).now();
     }
 }

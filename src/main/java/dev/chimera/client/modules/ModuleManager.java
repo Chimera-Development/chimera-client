@@ -20,6 +20,31 @@ public class ModuleManager {
         }
 
     }
+    public static Module getModule(Class<? extends Module> moduleClass){
+        Module returnModule = null;
+        for (Module module : moduleList) {
+            if (module.getClass().equals(moduleClass)){
+                returnModule = module;
+            }
+        }
+        return returnModule;
+    }
+    public static Module[] getModulesByCategory(ModuleCategory category){
+        ArrayList<Module> modulesLi = new ArrayList<>();
+        for (Module module : moduleList){
+            if (category.equals(module.getCategory())){
+                modulesLi.add(module);
+            }
+        }
+        if (modulesLi.size() == 0){
+            throw new RuntimeException("No Modules of category " + category.title);
+        }
+        Module[] modules = new Module[modulesLi.size()];
+        for (int i = 0; i < modulesLi.size(); i++) {
+            modules[i] = modulesLi.get(i);
+        }
+        return modules;
+    }
 
     private static Class<?>[] getConstructorParameterTypes(Object... args) {
         Class<?>[] parameterTypes = new Class[args.length];
